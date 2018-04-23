@@ -1,0 +1,45 @@
+{% extends "ghapp/master.html" %}
+
+{% block title %}Green House System{% endblock %}
+
+{% block content %}
+<fieldset class="preview-border col-md-6">
+	<legend>Atmospheric Conditions:</legend>
+	<span class="label label-info">Temperature: </span>
+	<label class="label label-info">{{ temperature }}</label>
+	<hr/>
+	<label class="label label-info">Humidity: </label>
+	<label class="label label-info">{{ humidity }}</label>
+</fieldset>
+<fieldset class="preview-border col-md-8">
+	<legend>Soil Conditions:</legend>
+	<label class="label label-info">Moisture Content: </label>
+	<label class="label label-info">{{ soil_moisture }}</label>
+</fieldset>
+<fieldset class="preview-border col-md-8">
+	<legend>Recent Activity:</legend>
+	<font size = "1.6" weight="0.2" >
+	<table class="table-striped table-hover table-bordered">
+		<tr>
+			<th>Activity</th>
+			<th>Initiated by</th>
+			<th>Date</th>
+		</tr>
+		{% for activity in activities %}
+			<tr class = "activity-data">
+				<th>{{ activity.get_activity_display }}</th>
+				<th>{{ activity.user }}</th>
+				<th>{{ activity.date_recorded }}</th>
+			</tr>
+		{% endfor %}
+	</table>
+	</font>
+</fieldset>
+{% endblock %}
+{% block footer %}
+<ul class="nav navbar-nav">
+	<li>
+		<a class = "nav-link" href="{% url 'ghapp:logout' %}">Logout</a>
+	</li>
+</ul>
+{% endblock %}
