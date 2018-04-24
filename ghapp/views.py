@@ -13,6 +13,7 @@ def system_preview(request):
 	#'''
 	if request.user.is_authenticated:
 		greenhouse = GreenHouse()
+		activities_qs = list(ActivityMeta.objects.all())[:3]
 		context = {
 			'temperature':str(greenhouse.get_temperature()),
 			'humidity':str(greenhouse.get_humidity()),
@@ -20,6 +21,10 @@ def system_preview(request):
 			'activities':activities_qs
 		}
 		rendered = render(request, 'ghapp/system_preview.html', context=context)
+	else:
+		rendered = render(request, 'ghapp/index.html')
+	return rendered
+
 	'''
 	if request.user.is_authenticated:
 		sensor_qs = list(SensorData.objects.all())[0]
@@ -32,6 +37,3 @@ def system_preview(request):
 		}
 		rendered = render(request, 'ghapp/system_preview.html', context=context)
 	'''
-	else:
-		rendered = render(request, 'ghapp/index.html')
-	return rendered
