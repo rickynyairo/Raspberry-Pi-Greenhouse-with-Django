@@ -10,14 +10,16 @@ def control_panel(request, command):
 	pass
 
 def system_preview(request):
-	'''
-	greenhouse = GreenHouse()
-	context = {
-		'temperature':str(greenhouse.get_temperature()),
-		'humidity':str(greenhouse.get_humidity()),
-		'soil_moisture':str(greenhouse.get_soil_moisture()),
-		'activities':activities_qs
-	}
+	#'''
+	if request.user.is_authenticated:
+		greenhouse = GreenHouse()
+		context = {
+			'temperature':str(greenhouse.get_temperature()),
+			'humidity':str(greenhouse.get_humidity()),
+			'soil_moisture':str(greenhouse.get_soil_moisture()),
+			'activities':activities_qs
+		}
+		rendered = render(request, 'ghapp/system_preview.html', context=context)
 	'''
 	if request.user.is_authenticated:
 		sensor_qs = list(SensorData.objects.all())[0]
@@ -29,6 +31,7 @@ def system_preview(request):
 			'activities':activities_qs
 		}
 		rendered = render(request, 'ghapp/system_preview.html', context=context)
+	'''
 	else:
 		rendered = render(request, 'ghapp/index.html')
 	return rendered
