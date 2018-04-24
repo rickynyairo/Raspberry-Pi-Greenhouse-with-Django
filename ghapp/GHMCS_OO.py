@@ -36,6 +36,7 @@ class GreenhouseSystem(object):
 
 	def get_temperature(self):
 		humidity, temperature = Adafruit_DHT.read_retry(
+			sensor=Adafruit_DHT.DHT11,
 			pin = dht_pin,
 			retries=5
 		)
@@ -43,6 +44,7 @@ class GreenhouseSystem(object):
 
 	def get_humidity(self):
 		humidity, temperature = Adafruit_DHT.read_retry(
+			sensor=Adafruit_DHT.DHT11,
 			pin = dht_pin,
 			retries=5
 		)
