@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from .models import SensorData, ActivityMeta
-#from .GHMCS_OO import GreenhouseSystem as GreenHouse
+from .GHMCS_OO import GreenhouseSystem as GreenHouse
 
 def index(request):
 	return render(request, 'ghapp/index.html')
