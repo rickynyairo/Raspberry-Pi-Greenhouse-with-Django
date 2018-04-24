@@ -20,7 +20,6 @@ def system_preview(request):
 	}
 	'''
 	if request.user.is_authenticated:
-		template_to_render = 'ghapp/system_preview.html'
 		sensor_qs = list(SensorData.objects.all())[0]
 		activities_qs = list(ActivityMeta.objects.all())[:3]
 		context = {
@@ -29,8 +28,7 @@ def system_preview(request):
 			'soil_moisture':str(sensor_qs.get_soil_moisture_state_display()),
 			'activities':activities_qs
 		}
+		rendered = render(request, 'ghapp/system_preview.html', context=context)
 	else:
-		context={}
-		template_to_render = 'ghapp/login.html'
-	
-	return render(request, template_to_render, context=context)
+		rendered = render(request, 'ghapp/index.html')
+	return rendered
