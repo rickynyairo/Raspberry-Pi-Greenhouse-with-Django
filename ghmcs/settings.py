@@ -25,7 +25,7 @@ SECRET_KEY = 'p2a-x902e-h*k_is+8p$ucq0-&w00#nzuo%2=(6k!daf6muv_e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 LOGIN_REDIRECT_URL = 'ghapp:index'
-ALLOWED_HOSTS = ['raspberrypi']
+ALLOWED_HOSTS = ['raspberrypi', '127.0.0.1', 'localhost']
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
