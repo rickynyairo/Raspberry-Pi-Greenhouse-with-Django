@@ -24,7 +24,7 @@ GPIO.setup(vent_servo, GPIO.OUT)
 
 
 class GreenhouseSystem(object):
-	sensor=Adafruit_DHT.DHT11,
+	sensor=Adafruit_DHT.DHT11
 	soil_moisture_state = GPIO.input(soil_moisture)
 
 	def get_soil_moisture(self):
