@@ -20,15 +20,9 @@ def main():
 	}
 
 	#save data to db via the server:
-	r = requests.post(url=url, data=data)
+	r = requests.post(url=url, json=data)
 
-	with open ('httperror.txt' , 'w') as text_file:
-		text_file.write(r.text)
-
-
-
-
-	
+	print (r.text)
 
 
 if __name__ == "__main__":
