@@ -37,13 +37,6 @@
 </fieldset>
 
 {% endblock %}
-{% block footer %}
-<ul class="nav navbar-nav">
-	<li>
-		<a class = "nav-link" href="{% url 'ghapp:logout' %}">Logout</a>
-	</li>
-</ul>
-{% endblock %}
 
 {% block brython %}
 <button id="button0">Trial</button>
@@ -58,3 +51,12 @@
 </script>
 
 {% endblock %}
+
+{% block footer %}
+<ul class="nav navbar-nav">
+	<li>
+		<a class = "nav-link" href="{% url 'ghapp:logout' %}">Logout</a>
+	</li>
+</ul>
+{% endblock %}
+

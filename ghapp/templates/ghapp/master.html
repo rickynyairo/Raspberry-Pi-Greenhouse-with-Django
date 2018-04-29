@@ -42,9 +42,7 @@
 	</div>
 
 	<div class = 'container'>
-		<script src = "{% static 'ghapp/js/brython.js' %}">
-		</script>
-		{% block brython%}
+		{% block brython %}
 
 		{% endblock %}
 	</div>
@@ -58,6 +56,8 @@
 		</div>
 		
 	</nav>
+	<script src = "{% static 'ghapp/js/brython.js' %}">
+		</script>
 </body>
 
 </html>
