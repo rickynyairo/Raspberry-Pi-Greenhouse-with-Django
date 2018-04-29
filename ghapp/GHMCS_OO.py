@@ -3,7 +3,7 @@ import RPi.GPIO as GPIO
 from time import sleep
 import Adafruit_DHT
 from django.utils import timezone
-from .models import SensorData
+from models import SensorData
 #Pin Setup
 #ldr == light dependant resistor
 ldr=24
