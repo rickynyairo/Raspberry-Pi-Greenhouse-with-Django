@@ -40,7 +40,7 @@ class GreenhouseSystem(object):
 			pin = dht_pin,
 			retries=3
 		)
-		return temperature
+		return float(temperature)
 
 	def get_humidity(self):
 		humidity, temperature = Adafruit_DHT.read_retry(
@@ -48,7 +48,7 @@ class GreenhouseSystem(object):
 			pin = dht_pin,
 			retries=3
 		)
-		return humidity
+		return float(humidity)
 
 	def ldr_reading(self):
 		count=0
