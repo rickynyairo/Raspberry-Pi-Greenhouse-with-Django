@@ -1,6 +1,6 @@
 import requests
 
-from .GHMCS_OO import GreenhouseSystem as GreenHouse
+from GHMCS_OO import GreenhouseSystem as GreenHouse
 
 
 def main():
