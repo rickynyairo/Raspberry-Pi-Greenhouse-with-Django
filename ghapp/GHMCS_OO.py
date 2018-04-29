@@ -2,8 +2,8 @@
 import RPi.GPIO as GPIO
 from time import sleep
 import Adafruit_DHT
-from django.utils import timezone
-from models import SensorData
+#from django.utils import timezone
+#from models import SensorData
 #Pin Setup
 #ldr == light dependant resistor
 ldr=24
@@ -81,13 +81,5 @@ class GreenhouseSystem(object):
 		GPIO.output(vent_servo, False)
 		pwm.ChangeDutyCycle(0)
 
-	def record_sensor_values(self):
-        #Save sensor readings to database
-		db_table=SensorData()
-		db_table.temperature = float(self.get_temperature())
-		db_table.humidity = float(self.get_humidity())
-		db_table.soil_moisture_state = self.get_soil_moisture()
-		db_table.date_recorded = timezone.now()
-		db_table.save()
-
+	
 
