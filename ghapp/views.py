@@ -1,16 +1,25 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.parsers import JSONParser
+from rest_framework.renderers import JSONRenderer
+from django.http import HttpResponse, JsonResponse
+from django.utils import timezone
+import datetime
+
+from .serializers import SensorDataSerializer
 from .models import SensorData, ActivityMeta
 from .GHMCS_OO import GreenhouseSystem as GreenHouse
 
+
 def index(request):
 	return render(request, 'ghapp/index.html')
+
 
 def control_panel(request, command):
 	pass
 
 def system_preview(request):
-	#'''
 	if request.user.is_authenticated:
 		greenhouse = GreenHouse()
 		activities_qs = list(ActivityMeta.objects.all())[:3]
@@ -24,10 +33,9 @@ def system_preview(request):
 	else:
 		rendered = render(request, 'ghapp/index.html')
 	return rendered
-
-	'''
+"""
 	if request.user.is_authenticated:
-		sensor_qs = list(SensorData.objects.all())[0]
+		sensor_qs = list(SensorData.objects.get())[0]
 		activities_qs = list(ActivityMeta.objects.all())[:3]
 		context = {
 			'temperature':str(sensor_qs.temperature),
@@ -36,4 +44,19 @@ def system_preview(request):
 			'activities':activities_qs
 		}
 		rendered = render(request, 'ghapp/system_preview.html', context=context)
-	'''
+	else:
+		rendered = render(request, 'ghapp/index.html')
+	return rendered
+"""
+
+@csrf_exempt
+def save_data(request):
+	data = JSONParser().parse(request)
+	serializer = SensorDataSerializer(data=data)
+
+	if serializer.is_valid():
+		serializer.save()
+		return JsonResponse(serializer.data, status=201)
+	else:
+		return JsonResponse(serializer.errors, status=400)
+
