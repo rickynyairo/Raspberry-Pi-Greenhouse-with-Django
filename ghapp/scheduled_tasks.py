@@ -22,7 +22,7 @@ def main():
 	#save data to db via the server:
 	r = requests.post(url=url, data=data)
 
-	print (r)
+	print (r.text)
 
 
 
