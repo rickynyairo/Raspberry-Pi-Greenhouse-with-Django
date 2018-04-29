@@ -22,8 +22,13 @@ def main():
 	#save data to db via the server:
 	r = requests.post(url=url, data=data)
 
-	print (r.text)
+	with open ('httperror.txt' , 'w') as text_file
+		text_file.write(r.text)
 
+	
+
+
+	
 
 
 if __name__ == "__main__":
