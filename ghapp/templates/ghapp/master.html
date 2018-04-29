@@ -9,7 +9,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'ghapp/css/ghapp.css' %}">
 </head>
 
-<body style="padding-top:100px">
+<body style="padding-top:100px" onload="brython()">
 	<nav class = "navbar navbar-default navbar-expand-lg fixed-top bg-dark">
 		<div class="container">
 			<div class="navbar-header">
@@ -50,6 +50,8 @@
 		</div>
 		
 	</nav>
+	<script src = "{% static 'ghapp/js/brython.js' %}">
+	</script>
 </body>
 
 </html>
