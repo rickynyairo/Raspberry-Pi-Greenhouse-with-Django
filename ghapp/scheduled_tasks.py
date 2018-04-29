@@ -22,10 +22,10 @@ def main():
 	#save data to db via the server:
 	r = requests.post(url=url, data=data)
 
-	with open ('httperror.txt' , 'w') as text_file
+	with open ('httperror.txt' , 'w') as text_file:
 		text_file.write(r.text)
 
-	
+
 
 
 	
