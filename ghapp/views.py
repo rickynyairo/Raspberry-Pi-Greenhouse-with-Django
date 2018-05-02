@@ -35,7 +35,7 @@ def system_preview(request):
 
 @csrf_exempt
 def save_data(request):
-	data = request.data
+	data = request.json
 	serializer = SensorDataSerializer(data=data)
 
 	if serializer.is_valid():
