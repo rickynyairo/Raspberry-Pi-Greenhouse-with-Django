@@ -37,7 +37,7 @@ def system_preview(request):
 
 @csrf_exempt
 def save_data(request):
-	data = json.loads(request.body)
+	data = json.loads(request.body.decode("utf-8"))
 	'''data2 = {
 		"temperature":666,
 		"humidity":777,
