@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 #from res_framework.decorators import api_view
+import json
 from django.http import HttpResponse, JsonResponse
 from django.utils import timezone
 import datetime
@@ -36,7 +37,7 @@ def system_preview(request):
 
 @csrf_exempt
 def save_data(request):
-	data = request.POST
+	data = json.loads(request.body)
 	'''data2 = {
 		"temperature":666,
 		"humidity":777,
