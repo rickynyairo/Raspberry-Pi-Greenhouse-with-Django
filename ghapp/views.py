@@ -36,12 +36,12 @@ def system_preview(request):
 
 @csrf_exempt
 def save_data(request):
-	data = request.POST
-	#data2 = {
+	data = request.data
+	'''data2 = {
 		"temperature":666,
 		"humidity":777,
 		"soil_moisture_state":"wet"	
-	}
+	}'''
 	serializer = SensorDataSerializer(data=data)
 
 	if serializer.is_valid():
