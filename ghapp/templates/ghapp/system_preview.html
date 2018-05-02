@@ -4,7 +4,7 @@
 
 {% block content %}
 <!--	<button id="button0" type="button" class="btn btn-default">Trial</button>	-->
-<button id="button0" type="button" class="btn btn-default">Lights</button>
+
 <fieldset class="preview-border col-md-6">
 	<legend>Atmospheric Conditions:</legend>
 	<label class="label label-info">Temperature: </label>
@@ -43,23 +43,7 @@
 
 {% block brython_block %}
 <script type="text/python">
-	from browser import document, alert
-	from GHMCS_OO import GreenhouseSystem as GreenHouse
-
-	lights_state = 'off'
-
-	def lights_func(ev):
-		if lights_state is "off":
-			GreenHouse().switch_lights('on')
-			lights_state = 'on'
-			alert(lights_state)
-		else
-			GreenHouse().switch_lights('off')
-			lights_state = 'off'
-			alert(lights_state)
-			
-	document["button0"].bind("click", hello)
-
+	#from browser import document, alert, ajax
 </script>
 
 {% endblock %}

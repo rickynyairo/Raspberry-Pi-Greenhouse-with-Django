@@ -1,8 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.parsers import JSONParser
-from rest_framework.renderers import JSONRenderer
 from django.http import HttpResponse, JsonResponse
 from django.utils import timezone
 import datetime
@@ -16,7 +14,7 @@ def index(request):
 	return render(request, 'ghapp/index.html')
 
 
-def control_panel(request, command):
+def control_panel(request):
 	pass
 
 def system_preview(request):
@@ -33,6 +31,20 @@ def system_preview(request):
 	else:
 		rendered = render(request, 'ghapp/index.html')
 	return rendered
+
+
+@csrf_exempt
+def save_data(request):
+	data = request.data
+	serializer = SensorDataSerializer(data=data)
+
+	if serializer.is_valid():
+		serializer.save()
+		return JsonResponse(serializer.data, status=201)
+	else:
+		return JsonResponse(serializer.errors, status=400)
+
+
 """
 	if request.user.is_authenticated:
 		sensor_qs = list(SensorData.objects.get())[0]
@@ -48,15 +60,3 @@ def system_preview(request):
 		rendered = render(request, 'ghapp/index.html')
 	return rendered
 """
-
-@csrf_exempt
-def save_data(request):
-	data = request.data
-	serializer = SensorDataSerializer(data=data)
-
-	if serializer.is_valid():
-		serializer.save()
-		return JsonResponse(serializer.data, status=201)
-	else:
-		return JsonResponse(serializer.errors, status=400)
-
