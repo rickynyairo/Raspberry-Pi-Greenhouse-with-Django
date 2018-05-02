@@ -36,7 +36,7 @@ def system_preview(request):
 
 @csrf_exempt
 def save_data(request):
-	data = request.data
+	data = request.body
 	'''data2 = {
 		"temperature":666,
 		"humidity":777,
