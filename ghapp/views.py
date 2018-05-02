@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from res_framework.decorators import api_view
+#from res_framework.decorators import api_view
 from django.http import HttpResponse, JsonResponse
 from django.utils import timezone
 import datetime
@@ -35,9 +35,8 @@ def system_preview(request):
 
 
 @csrf_exempt
-@api_view(('POST',))
 def save_data(request):
-	data = request.json
+	data = request.json()
 	serializer = SensorDataSerializer(data=data)
 
 	if serializer.is_valid():
