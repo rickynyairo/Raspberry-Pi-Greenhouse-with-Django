@@ -15,6 +15,7 @@ from .GHMCS_OO import GreenhouseSystem as GreenHouse
 def index(request):
 	return render(request, 'ghapp/index.html')
 
+@csrf_exempt
 def commands(request):
 	command_id = request.POST['command']
 	greenhouse = GreenHouse()
@@ -33,11 +34,13 @@ def commands(request):
 	return response
 
 
-
-
-
 def control_panel(request):
-	return render(request, 'ghapp/control_panel.html')
+	if request.user.is_authenticated:
+		rendered = render(request, 'ghapp/control_panel.html')
+	else:
+		rendered = render(request, 'ghapp/index.html')
+	return rendered
+
 
 def system_preview(request):
 	if request.user.is_authenticated:
