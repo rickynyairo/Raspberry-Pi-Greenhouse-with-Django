@@ -17,7 +17,7 @@ def index(request):
 
 @csrf_exempt
 def commands(request):
-	command_id = request.POST['command']
+	command_id = int(request.POST['command'])
 	greenhouse = GreenHouse()
 	if command_id == 100:
 		#this means lights are on and should be switched off
@@ -29,7 +29,7 @@ def commands(request):
 		response = JsonResponse({"lights":"on"}, status=201)
 	
 	else:
-		response = JsonResponse({"error":"command not found"}, status=400)
+		response = JsonResponse({"error":"command " + str(command_id) + " not found"}, status=400)
 	
 	return response
 
