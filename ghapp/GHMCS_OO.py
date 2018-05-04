@@ -37,7 +37,7 @@ class GreenhouseSystem(object):
 		if state is 'on':
 			GPIO.output(led, GPIO.HIGH)
 		elif state is 'off':
-			GPIO.output(led, GPIO.HIGH)
+			GPIO.output(led, GPIO.LOW)
 		else:
 			GPIO.output(led, GPIO.LOW)
 

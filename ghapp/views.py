@@ -15,9 +15,29 @@ from .GHMCS_OO import GreenhouseSystem as GreenHouse
 def index(request):
 	return render(request, 'ghapp/index.html')
 
+def commands(request):
+	command_id = request.POST['command']
+	greenhouse = GreenHouse()
+	if command_id == 100:
+		#this means lights are on and should be switched off
+		greenhouse.switch_lights("off")
+		response = JsonResponse({"lights":"off"}, status=201)
+
+	elif command_id == 101:
+		greenhouse.switch_lights("on")
+		response = JsonResponse({"lights":"on"}, status=201)
+	
+	else:
+		response = JsonResponse({"error":"command not found"}, status=400)
+	
+	return response
+
+
+
+
 
 def control_panel(request):
-	pass
+	return render(request, 'ghapp/control_panel.html')
 
 def system_preview(request):
 	if request.user.is_authenticated:
@@ -38,11 +58,6 @@ def system_preview(request):
 @csrf_exempt
 def save_data(request):
 	data = json.loads(request.body.decode("utf-8"))
-	'''data2 = {
-		"temperature":666,
-		"humidity":777,
-		"soil_moisture_state":"wet"	
-	}'''
 	serializer = SensorDataSerializer(data=data)
 
 	if serializer.is_valid():

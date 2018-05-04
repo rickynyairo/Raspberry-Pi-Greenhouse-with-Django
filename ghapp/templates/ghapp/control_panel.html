@@ -6,29 +6,40 @@
 
 <fieldset class="preview-border col-md-6">
 	<legend>Commands:</legend>
-	<label class="label label-info">Moisture Content: </label>
-	<button type="submit" class="btn btn-default">Send</button>
-</fieldset>
-<fieldset class="preview-border col-md-8">
-	<legend>Recent Activity:</legend>
-	<font size = "1.6" weight="0.2" >
-	<table class="table-striped table-hover table-bordered">
-		<tr>
-			<th>Activity</th>
-			<th>Initiated by</th>
-			<th>Date</th>
-		</tr>
-		{% for activity in activities %}
-			<tr class = "activity-data">
-				<th>{{ activity.get_activity_display }}</th>
-				<th>{{ activity.user }}</th>
-				<th>{{ activity.date_recorded }}</th>
-			</tr>
-		{% endfor %}
-	</table>
-	</font>
+	<button class="btn btn-default" id="lights_button">Lights</button>
+	<label class="label label-info" id="response_label"></label>
 </fieldset>
 {% endblock %}
+
+{% block brython_block %}
+
+<script type="text/python">
+	from browser import document, ajax
+
+	lights_state = 0 
+
+	def lights(ev):
+		req = ajax.ajax()
+		url = "http://raspi/ghapp/commands/"
+		command_id = 100
+		if lights_state == 0:
+			command_id = 101
+			lights_state = 1
+		else:
+			command_id = 100
+			lights_state = 0
+		req.open('POST', url, True)
+		req.set_header('content-type', 'application/x-www-form-urlencoded')
+		req.send({'command':command_id})
+		document['response_label'] <= req.text
+
+	document['lights_button'].bind("click", lights)	
+
+
+</script>
+
+{% endblock %}
+
 {% block footer %}
 <ul class="nav navbar-nav">
 	<li>
