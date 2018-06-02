@@ -7,9 +7,10 @@
 	<title>{% block title %}{% endblock %} </title>
 	<link rel="stylesheet" href="{% static 'ghapp/css/bootstrap.min.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'ghapp/css/ghapp.css' %}">
+	<script src = "{% static 'ghapp/js/jquery-3.3.1.min.js' %}"></script>
 </head>
 
-<body style="padding-top:100px" onload="brython()">
+<body style="padding-top:100px">
 	<nav class = "navbar navbar-default navbar-expand-lg fixed-top bg-dark">
 		<div class="container">
 			<div class="navbar-header">
@@ -41,9 +42,7 @@
 		{% endblock %}
 	</div>
 	<div class = 'container'>
-		<script src = "{% static 'ghapp/js/brython.js' %}">
-		</script>
-		{% block brython_block %}
+		{% block javascript %}
 
 		{% endblock %}
 	</div>
@@ -58,7 +57,7 @@
 		</div>
 		
 	</nav>
-
+	
 </body>
 
 </html>

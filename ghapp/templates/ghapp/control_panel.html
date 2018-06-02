@@ -11,30 +11,9 @@
 </fieldset>
 {% endblock %}
 
-{% block brython_block %}
+{% block javascript %}
 
-<script type="text/python">
-	from browser import document, ajax
-
-	lights_state = 0 
-
-	def lights(ev):
-		req = ajax.ajax()
-		url = "http://raspi/ghapp/commands/"
-		command_id = 100
-		if lights_state == 0:
-			command_id = 101
-			lights_state = 1
-		else:
-			command_id = 100
-			lights_state = 0
-		req.open('POST', url, True)
-		req.set_header('content-type', 'application/x-www-form-urlencoded')
-		req.send({'command':command_id})
-		document['response_label'] <= req.text
-
-	document['lights_button'].bind("click", lights)	
-
+<script type="text/javascript">
 
 </script>
 
