@@ -3,14 +3,14 @@ import RPi.GPIO as GPIO
 from time import sleep
 import Adafruit_DHT
 
-ldr=24
-led = 13
-fan_forward = 20
+ldr = 16
+led = 22
+fan_forward = 19
 soil_moisture = 21
 water_pump = 16
 vent_servo = 2
 vent_angle = 90
-dht_pin = 19
+dht_pin = 20
 
 #GPIO SETUP
 GPIO.setmode(GPIO.BCM)
@@ -49,6 +49,8 @@ class GreenhouseSystem(object):
 			pin = dht_pin,
 			retries=3
 		)
+		if temperature is None:
+			temperature = 0
 		return float(temperature)
 
 	def get_humidity(self):
@@ -57,6 +59,8 @@ class GreenhouseSystem(object):
 			pin = dht_pin,
 			retries=3
 		)
+		if humidity is None:
+			humidity = 0
 		return float(humidity)
 
 	def ldr_reading(self):
