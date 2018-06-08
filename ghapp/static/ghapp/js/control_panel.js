@@ -1,5 +1,5 @@
 
-var url = "http://raspi/ghapp/commands/";
+var url = "/ghapp/commands/";
 
 var lights_state = false;
 
