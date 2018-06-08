@@ -10,14 +10,14 @@ $(document).ready(function(){
 	    	console.log("turning lights on");
 	    	$.post(url,{"command":101},function(data, status){
 	    		console.log(JSON.stringify(data));
-	    		$("#response_label").text(JSON.stringify(data));
+	    		$("#lights_response_label").text(JSON.stringify(data));
 	    		lights_state = true;
 	    	});
 	    }else{
 	    	console.log("turning lights off");
 	    	$.post(url,{"command":100},function(data, status){
 	    		console.log(JSON.stringify(data));
-	    		$("#response_label").text(JSON.stringify(data));
+	    		$("#lights_response_label").text(JSON.stringify(data));
 	    		lights_state = false;
 	    	});
 	    }
