@@ -21,5 +21,5 @@ $(document).ready(
 	    		lights_state = false;
 	    	});
 	    }
-	});
+	})
 );
