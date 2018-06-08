@@ -17,8 +17,8 @@ def index(request):
 
 @csrf_exempt
 def commands(request):
-	#command_id = int(request.POST['command'])
-	command_id = json.loads(request.body.decode("utf-8"))['command']
+	command_id = int(request.POST['command'])
+	#command_id = json.loads(request.body.decode("utf-8"))['command']
 	greenhouse = GreenHouse()
 	if command_id == 100:
 		#this means lights are on and should be switched off
