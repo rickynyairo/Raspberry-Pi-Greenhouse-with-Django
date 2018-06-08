@@ -41,6 +41,6 @@
 #parent_ul>li{
 	display:inline-block;
 }
-#lights_response_label{
-	margin-left:20px;
+.response_label{
+	margin-left:40px;
 }

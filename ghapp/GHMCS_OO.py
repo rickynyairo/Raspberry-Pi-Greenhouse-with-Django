@@ -27,7 +27,7 @@ class GreenhouseSystem(object):
 	soil_moisture_state = GPIO.input(soil_moisture)
 
 	def get_soil_moisture(self):
-		if self.soil_moisture_state == 1:
+		if self.soil_moisture_state == 0:
 			state='wet'
 		else:
 			state='dry'
