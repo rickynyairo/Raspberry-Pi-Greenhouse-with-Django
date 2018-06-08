@@ -3,7 +3,7 @@ var url = "http://raspi/ghapp/commands/";
 
 var lights_state = false;
 
-$(document).ready(
+$(document).ready(function(){
 	$("#lights_button").click(function(){
 		console.log("clicked");
 	    if (!lights_state){
@@ -21,5 +21,6 @@ $(document).ready(
 	    		lights_state = false;
 	    	});
 	    }
-	})
+	});
+	}
 );
