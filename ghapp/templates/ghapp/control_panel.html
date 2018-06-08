@@ -2,6 +2,13 @@
 
 {% block title %}Green House System{% endblock %}
 
+
+{% block javascript %}
+
+<script src = "{% static 'ghapp/js/control_panel.js' %}"></script>
+
+{% endblock %}
+
 {% block content %}
 
 <fieldset class="preview-border col-md-6">
@@ -18,10 +25,4 @@
 		<a class = "nav-link" href="{% url 'ghapp:logout' %}">Logout</a>
 	</li>
 </ul>
-{% endblock %}
-
-{% block javascript %}
-
-<script src = "{% static 'ghapp/js/control_panel.js' %}"></script>
-
 {% endblock %}
