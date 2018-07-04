@@ -44,7 +44,7 @@ def commands(request):
 	greenhouse = GreenHouse()
 	if command_id == 100:
 		greenhouse.switch_lights("off")
-		#act = ActivityMeta(3, request.user)
+		act = ActivityMeta(3, request.user)
 		response = JsonResponse({"lights":"off"}, status=201)
 	elif command_id == 101:
 		greenhouse.switch_lights("on")
