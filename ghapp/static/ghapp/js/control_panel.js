@@ -44,6 +44,7 @@ $(function(){
 	});
 	$("#pump_button").click(function(){
 		console.log("turning pump on");
+		$("#pump_response_label").text(" ")
 	    $.post(url,{"command":300},function(data, status){
 			console.log(JSON.stringify(data));
 			$("#pump_response_label").text(JSON.stringify(data));
@@ -55,14 +56,14 @@ $(function(){
 	    	console.log("opening vent");
 	    	$.post(url,{"command":201},function(data, status){
 	    		console.log(JSON.stringify(data));
-	    		$("#fan_response_label").text(JSON.stringify(data));
+	    		$("#vent_response_label").text(JSON.stringify(data));
 	    		vent_state = true;
 	    	});
 	    }else{
 	    	console.log("closing vent");
-	    	$.post(url,{"command":400},function(data, status){
+	    	$.post(url,{"command":200},function(data, status){
 	    		console.log(JSON.stringify(data));
-	    		$("#fan_response_label").text(JSON.stringify(data));
+	    		$("#vent_response_label").text(JSON.stringify(data));
 	    		vent_state = false;
 	    	});
 	    }

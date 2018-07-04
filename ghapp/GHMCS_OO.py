@@ -5,7 +5,7 @@ import Adafruit_DHT
 
 ldr = 16
 led = 22
-fan = 6
+fan = 12
 soil_moisture = 21
 water_pump = 4
 vent_servo = 2
