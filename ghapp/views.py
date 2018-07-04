@@ -7,33 +7,13 @@ from django.http import HttpResponse, JsonResponse
 from django.utils import timezone
 import datetime
 
-from .serializers import SensorDataSerializer
+from .serializers import SensorDataSerializer, ActivityMetaSerializer
 from .models import SensorData, ActivityMeta
 from .GHMCS_OO import GreenhouseSystem as GreenHouse
 
 
 def index(request):
 	return render(request, 'ghapp/index.html')
-
-@csrf_exempt
-def commands(request):
-	command_id = int(request.POST['command'])
-	#command_id = json.loads(request.body.decode("utf-8"))['command']
-	greenhouse = GreenHouse()
-	if command_id == 100:
-		#this means lights are on and should be switched off
-		greenhouse.switch_lights("off")
-		response = JsonResponse({"lights":"off"}, status=201)
-
-	elif command_id == 101:
-		greenhouse.switch_lights("on")
-		response = JsonResponse({"lights":"on"}, status=201)
-	
-	else:
-		response = JsonResponse({"error":"command " + str(command_id) + " not found"}, status=400)
-	
-	return response
-
 
 def control_panel(request):
 	if request.user.is_authenticated:
@@ -42,11 +22,10 @@ def control_panel(request):
 		rendered = render(request, 'ghapp/index.html')
 	return rendered
 
-
 def system_preview(request):
 	if request.user.is_authenticated:
 		greenhouse = GreenHouse()
-		activities_qs = list(ActivityMeta.objects.all())[:3]
+		activities_qs = list(ActivityMeta.objects.all())[:4]
 		context = {
 			'temperature':str(greenhouse.get_temperature()),
 			'humidity':str(greenhouse.get_humidity()),
@@ -58,6 +37,44 @@ def system_preview(request):
 		rendered = render(request, 'ghapp/index.html')
 	return rendered
 
+@csrf_exempt
+def commands(request):
+	command_id = int(request.POST['command'])
+	#command_id = json.loads(request.body.decode("utf-8"))['command']
+	greenhouse = GreenHouse()
+	if command_id == 100:
+		greenhouse.switch_lights("off")
+		act = ActivityMeta("lights_off", request.user)
+		response = JsonResponse({"lights":"off"}, status=201)
+	elif command_id == 101:
+		greenhouse.switch_lights("on")
+		act = ActivityMeta("lights_on", request.user)
+		response = JsonResponse({"lights":"on"}, status=201)
+	elif command_id == 200:
+		greenhouse.move_vent(80)
+		act = ActivityMeta("open_vent", request.user)
+		response = JsonResponse({"vent":"open"}, status=201)
+	elif command_id == 201:
+		greenhouse.move_vent(10)
+		act = ActivityMeta("close_vent", request.user)
+		response = JsonResponse({"vent":"closed"}, status=201)
+	elif command_id == 300:
+		greenhouse.switch_pump(3)
+		act = ActivityMeta("water_crops", request.user)
+		response = JsonResponse({"water pump":"done"}, status=201)
+	elif command_id == 400:
+		greenhouse.switch_fan("off")
+		act = ActivityMeta("stop_fan", request.user)
+		response = JsonResponse({"fan":"off"}, status=201)
+	elif command_id == 401:
+		greenhouse.switch_fan("on")
+		act = ActivityMeta("start_fan", request.user)
+		response = JsonResponse({"fan":"on"}, status=201)
+	else:
+		response = JsonResponse({"error":"command " + str(command_id) + " not found"}, status=400)
+	if act:
+		act.save()
+	return response
 
 @csrf_exempt
 def save_data(request):
@@ -69,9 +86,20 @@ def save_data(request):
 		return JsonResponse(serializer.data, status=201)
 	else:
 		return JsonResponse(serializer.errors, status=400)
-
-
 """
+@csrf_exempt
+def save_activity(request):
+	data = json.loads(request.body.decode("utf-8"))
+	serializer = ActivityMetaSerializer(data=data)
+	#fields = ('activity','user', 'date_recorded')
+	if serializer.is_valid():
+		serializer.save()
+		return JsonResponse(serializer.data, status=201)
+	else:
+		return JsonResponse(serializer.errors, status=400)
+
+
+
 	if request.user.is_authenticated:
 		sensor_qs = list(SensorData.objects.get())[0]
 		activities_qs = list(ActivityMeta.objects.all())[:3]

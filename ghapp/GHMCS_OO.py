@@ -5,16 +5,17 @@ import Adafruit_DHT
 
 ldr = 16
 led = 22
-fan_forward = 19
+fan = 6
 soil_moisture = 21
-water_pump = 16
+water_pump = 4
 vent_servo = 2
 vent_angle = 90
 dht_pin = 20
 
+
 #GPIO SETUP
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(fan_forward, GPIO.OUT)
+GPIO.setup(fan, GPIO.OUT)
 GPIO.setup(led, GPIO.OUT)
 GPIO.setup(water_pump, GPIO.OUT)
 GPIO.setup(soil_moisture, GPIO.IN)
@@ -23,10 +24,8 @@ GPIO.setup(vent_servo, GPIO.OUT)
 
 
 class GreenhouseSystem(object):
-	soil_moisture_state = GPIO.input(soil_moisture)
-
 	def get_soil_moisture(self):
-		if self.soil_moisture_state == 0:
+		if GPIO.input(soil_moisture) == 0:
 			state='wet'
 		else:
 			state='dry'
@@ -40,7 +39,13 @@ class GreenhouseSystem(object):
 		else:
 			GPIO.output(led, GPIO.LOW)
 
-
+	def switch_fan(self, state='on'):
+		if state is 'on':
+			GPIO.output(fan, GPIO.HIGH)
+		elif state is 'off':
+			GPIO.output(fan, GPIO.LOW)
+		else:
+			GPIO.output(fan, GPIO.LOW)
 
 	def get_temperature(self):
 		humidity, temperature = Adafruit_DHT.read_retry(
@@ -50,6 +55,7 @@ class GreenhouseSystem(object):
 		)
 		if temperature is None:
 			temperature = 0
+			humidity = 0
 		return float(temperature)
 
 	def get_humidity(self):
@@ -58,8 +64,10 @@ class GreenhouseSystem(object):
 			pin = dht_pin,
 			retries=3
 		)
+		
 		if humidity is None:
 			humidity = 0
+			temperature = 0
 		return float(humidity)
 
 	def ldr_reading(self):
@@ -67,7 +75,7 @@ class GreenhouseSystem(object):
 
 		GPIO.setup(ldr, GPIO.OUT)
 		GPIO.output(ldr, GPIO.LOW)
-		time.sleep(1)
+		sleep(1)
 
 		GPIO.setup(ldr,GPIO.IN)
 
@@ -76,7 +84,7 @@ class GreenhouseSystem(object):
 
 		return count
 
-	def open_vent(self, angle = vent_angle):
+	def move_vent(self, angle = vent_angle):
 		#setup pwm on servo pin
 		pwm = GPIO.PWM(vent_servo, 50)
 		
@@ -92,6 +100,11 @@ class GreenhouseSystem(object):
 
 		GPIO.output(vent_servo, False)
 		pwm.ChangeDutyCycle(0)
-
+	
+	def switch_pump(self, duration = 5):
+		GPIO.output(water_pump, True)
+		sleep(duration)
+		GPIO.output(water_pump, False)
+		return 0
 	
 
