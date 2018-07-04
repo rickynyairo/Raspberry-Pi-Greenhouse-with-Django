@@ -27,7 +27,7 @@ def detect_properties(image_path):
     return max_red, fraction
 
 def main():
-    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/home/pi/Desktop/fyp/web_app/key/fyp-ghmcs-cd159d1de565.json")
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = "/home/pi/Desktop/fyp/web_app/key/fyp-ghmcs-cd159d1de565.json"
     sample_grass = os.path.join(
         os.getcwd(), 
         "stati/ghapp/images/sample_grass_1.jpeg"
