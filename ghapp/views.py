@@ -8,9 +8,9 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, JsonResponse
 from django.utils import timezone
-from django.contrib.auth import User
+from django.contrib.auth.models import User
 
-
+#relative imports
 from .serializers import SensorDataSerializer, ActivityMetaSerializer
 from .models import SensorData, ActivityMeta
 from .GHMCS_OO import GreenhouseSystem as GreenHouse
