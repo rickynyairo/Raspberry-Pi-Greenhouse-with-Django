@@ -1,11 +1,15 @@
+#standard imports
+import json
+import datetime
+
+#django imports
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-#from res_framework.decorators import api_view
-import json
 from django.http import HttpResponse, JsonResponse
 from django.utils import timezone
-import datetime
+from django.contrib.auth import User
+
 
 from .serializers import SensorDataSerializer, ActivityMetaSerializer
 from .models import SensorData, ActivityMeta
@@ -40,40 +44,41 @@ def system_preview(request):
 @csrf_exempt
 def commands(request):
 	command_id = int(request.POST['command'])
+	user = User.objects.get(username=request.user.username)
 	#command_id = json.loads(request.body.decode("utf-8"))['command']
 	greenhouse = GreenHouse()
 	if command_id == 100:
 		greenhouse.switch_lights("off")
-		act = ActivityMeta(3, request.user)
+		act = ActivityMeta("lights_off", user)
 		response = JsonResponse({"lights":"off"}, status=201)
 	elif command_id == 101:
 		greenhouse.switch_lights("on")
-		#act = ActivityMeta("lights_on", request.user)
+		#act = ActivityMeta("lights_on", user)
 		response = JsonResponse({"lights":"on"}, status=201)
 	elif command_id == 200:
 		greenhouse.move_vent(80)
-		#act = ActivityMeta("open_vent", request.user)
+		#act = ActivityMeta("open_vent", user)
 		response = JsonResponse({"vent":"open"}, status=201)
 	elif command_id == 201:
 		greenhouse.move_vent(10)
-		#act = ActivityMeta("close_vent", request.user)
+		#act = ActivityMeta("close_vent", user)
 		response = JsonResponse({"vent":"closed"}, status=201)
 	elif command_id == 300:
 		greenhouse.switch_pump(3)
-		#act = ActivityMeta("water_crops", request.user)
+		#act = ActivityMeta("water_crops", user)
 		response = JsonResponse({"water pump":"done"}, status=201)
 	elif command_id == 400:
 		greenhouse.switch_fan("off")
-		#act = ActivityMeta("stop_fan", request.user)
+		#act = ActivityMeta("stop_fan", user)
 		response = JsonResponse({"fan":"off"}, status=201)
 	elif command_id == 401:
 		greenhouse.switch_fan("on")
-		#act = ActivityMeta("start_fan", request.user)
+		#act = ActivityMeta("start_fan", user)
 		response = JsonResponse({"fan":"on"}, status=201)
 	else:
 		response = JsonResponse({"error":"command " + str(command_id) + " not found"}, status=400)
-	#if act:
-		#act.save()
+	if act:
+		act.save()
 	return response
 
 @csrf_exempt
@@ -86,7 +91,7 @@ def save_data(request):
 		return JsonResponse(serializer.data, status=201)
 	else:
 		return JsonResponse(serializer.errors, status=400)
-"""
+
 @csrf_exempt
 def save_activity(request):
 	data = json.loads(request.body.decode("utf-8"))
@@ -99,7 +104,7 @@ def save_activity(request):
 		return JsonResponse(serializer.errors, status=400)
 
 
-
+"""
 	if request.user.is_authenticated:
 		sensor_qs = list(SensorData.objects.get())[0]
 		activities_qs = list(ActivityMeta.objects.all())[:3]

@@ -4,13 +4,21 @@ from GHMCS_OO import GreenhouseSystem as GreenHouse
 
 
 def main():
-	greenhouse = GreenHouse()
+	gh = GreenHouse()
 
-	temperature = greenhouse.get_temperature()
-	humidity = greenhouse.get_humidity()
-	soil_moisture_state = greenhouse.get_soil_moisture()
+	temperature = gh.get_temperature()
+	humidity = gh.get_humidity()
+	soil_moisture_state = gh.get_soil_moisture()
 
-	#Here we'll insert corrective actions such as watering or airing
+	#corrective actions such as watering or airing based on conditions in the greenhouse
+	if temperature > 26:
+		gh.switch_fan("on")
+	elif humidity > 70:
+		gh.move_vent(90)
+		gh.switch_fan("off")
+	elif soil_moisture_state == "dry":
+		gh.switch_pump()
+	
 
 	url = "http://raspi/ghapp/save_data/"
 	data = {
@@ -18,7 +26,7 @@ def main():
 		"humidity":humidity,
 		"soil_moisture_state":soil_moisture_state
 	}
-
+	
 	#save data to db via the server:
 	r = requests.post(url=url, json=data)
 

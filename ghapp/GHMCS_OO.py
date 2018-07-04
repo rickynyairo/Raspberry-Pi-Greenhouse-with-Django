@@ -105,6 +105,5 @@ class GreenhouseSystem(object):
 		GPIO.output(water_pump, True)
 		sleep(duration)
 		GPIO.output(water_pump, False)
-		return 0
 	
 
