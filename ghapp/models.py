@@ -36,6 +36,9 @@ class ActivityMeta(models.Model):
 	)
 	user = models.ForeignKey(User,on_delete=models.CASCADE)
 	date_recorded = models.DateTimeField(default=timezone.now)
-
+	
+	class Meta:
+		ordering = ('-date_recorded',)
+	
 	def __str__(self):
 		return 'Recorded: ' + str(self.date_recorded) + ' by ' + str(self.user)
