@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import requests
 from sys import argv
 from GHMCS_OO import GreenhouseSystem as GreenHouse

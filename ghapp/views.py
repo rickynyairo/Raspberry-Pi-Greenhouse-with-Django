@@ -45,7 +45,7 @@ def system_preview(request):
 def commands(request):
 	command_id = int(request.POST['command'])
 	user = User.objects.get(username=request.user.username)
-	#act = ""
+	act = ""
 	#command_id = json.loads(request.body.decode("utf-8"))['command']
 	greenhouse = GreenHouse()
 	if command_id == 100:
@@ -78,8 +78,8 @@ def commands(request):
 		response = JsonResponse({"fan":"on"}, status=201)
 	else:
 		response = JsonResponse({"error":"command " + str(command_id) + " not found"}, status=400)
-	#if act:
-		#act.save()
+	if act is not "":
+		act.save()
 	return response
 
 @csrf_exempt
