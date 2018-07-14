@@ -21,7 +21,7 @@ def main():
 			gh.move_vent(20)
 			gh.switch_fan("off")
 		elif soil_moisture_state == "dry":
-			gh.switch_pump()
+			gh.switch_pump(3)
 		else:
 			gh.move_vent(0)
 			gh.switch_fan("off")
