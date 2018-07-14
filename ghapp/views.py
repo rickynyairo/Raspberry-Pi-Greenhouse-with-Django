@@ -57,11 +57,11 @@ def commands(request):
 		#act = ActivityMeta("lights_on", user)
 		response = JsonResponse({"lights":"on"}, status=201)
 	elif command_id == 200:
-		greenhouse.move_vent(80)
+		greenhouse.move_vent(90)
 		#act = ActivityMeta("open_vent", user)
 		response = JsonResponse({"vent":"open"}, status=201)
 	elif command_id == 201:
-		greenhouse.move_vent(10)
+		greenhouse.move_vent(170)
 		#act = ActivityMeta("close_vent", user)
 		response = JsonResponse({"vent":"closed"}, status=201)
 	elif command_id == 300:
