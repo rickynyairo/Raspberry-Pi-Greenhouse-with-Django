@@ -66,15 +66,14 @@ def commands(request):
 	command_id = int(request.POST['command'])
 	user = User.objects.get(username=request.user.username)
 	act = ""
-	#command_id = json.loads(request.body.decode("utf-8"))['command']
 	greenhouse = GreenHouse()
 	if command_id == 100:
 		greenhouse.switch_lights("off")
-		#act = ActivityMeta("lights_off", user)
+		act = ActivityMeta("lights_off", user)
 		response = JsonResponse({"lights":"off"}, status=201)
 	elif command_id == 101:
 		greenhouse.switch_lights("on")
-		#act = ActivityMeta("lights_on", user)
+		act = ActivityMeta("lights_on", user)
 		response = JsonResponse({"lights":"on"}, status=201)
 	elif command_id == 200:
 		greenhouse.move_vent(90)
