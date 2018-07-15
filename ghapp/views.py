@@ -64,41 +64,31 @@ def analytics(request):
 @csrf_exempt
 def commands(request):
 	command_id = int(request.POST['command'])
-	user = request.user#User.objects.get(username=request.user.username)
-	act = ""
+	#User.objects.get(username=request.user.username) act = ActivityMeta("lights_off", user) act = ""
 	greenhouse = GreenHouse()
 	if command_id == 100:
 		greenhouse.switch_lights("off")
-		act = ActivityMeta("lights_off", user)
 		response = JsonResponse({"lights":"off"}, status=201)
 	elif command_id == 101:
 		greenhouse.switch_lights("on")
-		act = ActivityMeta("lights_on", user)
 		response = JsonResponse({"lights":"on"}, status=201)
 	elif command_id == 200:
 		greenhouse.move_vent(90)
-		#act = ActivityMeta("open_vent", user)
 		response = JsonResponse({"vent":"open"}, status=201)
 	elif command_id == 201:
 		greenhouse.move_vent(170)
-		#act = ActivityMeta("close_vent", user)
 		response = JsonResponse({"vent":"closed"}, status=201)
 	elif command_id == 300:
 		greenhouse.switch_pump(3)
-		#act = ActivityMeta("water_crops", user)
 		response = JsonResponse({"water pump":"done"}, status=201)
 	elif command_id == 400:
 		greenhouse.switch_fan("off")
-		#act = ActivityMeta("stop_fan", user)
 		response = JsonResponse({"fan":"off"}, status=201)
 	elif command_id == 401:
 		greenhouse.switch_fan("on")
-		#act = ActivityMeta("start_fan", user)
 		response = JsonResponse({"fan":"on"}, status=201)
 	else:
 		response = JsonResponse({"error":"command " + str(command_id) + " not found"}, status=400)
-	if act is not "":
-		act.save()
 	return response
 
 @csrf_exempt
