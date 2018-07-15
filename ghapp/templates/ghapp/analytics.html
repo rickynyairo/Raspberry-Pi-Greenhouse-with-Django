@@ -7,8 +7,8 @@
 <div class = "container" id = "graph-div" style = "width: 550px; height: 400px; margin: 0 auto"></div>
 <script>
     $(document).ready(function(){
-        let temperature = "{{ temperature | js}}";
-        let humidity = "{{ humidity | js}}";
+        let temperature = "{{ temperature | safe}}";
+        let humidity = "{{ humidity | safe}}";
         let title = {
             text:'Greenhouse Conditions'
         };
