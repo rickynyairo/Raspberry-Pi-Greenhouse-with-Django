@@ -48,8 +48,8 @@ def analytics(request):
 		humidity = []
 
 		for data_object in data:
-			temperature.append(data_object.temperature)
-			humidity.append(data_object.humidity)
+			temperature.append(data_object.temperature())
+			humidity.append(data_object.humidity())
 		
 		context = {
 			"temperature":temperature,
