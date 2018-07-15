@@ -41,6 +41,26 @@ def system_preview(request):
 		rendered = render(request, 'ghapp/index.html')
 	return rendered
 
+def analytics(request):
+	if request.user.is_authenticated:
+		data = list(SensorData.objects.all())[:20]
+		temperature = []
+		humidity = []
+
+		for data_object in data:
+			temperature.append(data_object.temperature)
+			humidity.append(data_object.humidity)
+		
+		context = {
+			"temperature":temperature,
+			"humidity":humidity
+		}
+		
+		rendered = render(request, "ghapp/analytics.html", context=context)
+	else:
+		rendered = render(request, 'ghapp/index.html')
+	return rendered
+
 @csrf_exempt
 def commands(request):
 	command_id = int(request.POST['command'])
