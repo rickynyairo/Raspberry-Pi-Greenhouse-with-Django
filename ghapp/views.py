@@ -64,7 +64,7 @@ def analytics(request):
 @csrf_exempt
 def commands(request):
 	command_id = int(request.POST['command'])
-	user = User.objects.get(username=request.user.username)
+	user = request.user#User.objects.get(username=request.user.username)
 	act = ""
 	greenhouse = GreenHouse()
 	if command_id == 100:
