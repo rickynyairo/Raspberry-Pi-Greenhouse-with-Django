@@ -7,8 +7,11 @@
 <div class = "container" id = "graph-div" style = "width: 550px; height: 400px; margin: 0 auto"></div>
 <script>
     $(document).ready(function(){
-        let temperature = "{{ temperature | safe}}";
-        let humidity = "{{ humidity | safe}}";
+        let temperatureStr = "{{ temperature | safe}}";
+        let temperature = JSON.parse(temperatureStr);
+        let humidityStr = "{{ humidity | safe}}";
+        let humidity = JSON.parse(humidityStr);
+
         let title = {
             text:'Greenhouse Conditions'
         };
@@ -16,12 +19,15 @@
             text:'Atmospheric conditions'
         };
         let xAxis = {
+            title:{
+                text:"Recordings"
+            },
             categories:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 
         };
         let yAxis = {
             title:{
-                text:''
+                text:'Temp in (\xB0C) & Humidity in (g/cm\xB3)'
             },
             plotLines:[{
                 value:0,

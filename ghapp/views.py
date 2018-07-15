@@ -49,7 +49,7 @@ def analytics(request):
 
 		for data_object in data:
 			temperature.append(float(data_object.temperature))
-			humidity.append(float(data_object.temperature))
+			humidity.append(float(data_object.humidity))
 		
 		context = {
 			"temperature":temperature,
