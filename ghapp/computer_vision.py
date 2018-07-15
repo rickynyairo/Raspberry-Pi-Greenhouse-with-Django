@@ -34,12 +34,35 @@ def main():
         os.getcwd(), 
         "static/ghapp/images/sample_grass_with_red_dots.jpg"
         )
-    print ("No red dot:")
-    print (detect_properties(sample_grass))
-    print ("With red dot:")
-    print (detect_properties(sample_grass_with_red_dot))
-    print ("With red dots:")
-    print (detect_properties(sample_grass_with_red_dots))
+    sample_weeds_5 = os.path.join(
+        os.getcwd(), 
+        "static/ghapp/images/sample_weeds_5.jpeg"
+        )
+    sample_weeds_6 = os.path.join(
+        os.getcwd(), 
+        "static/ghapp/images/sample_weeds_6.jpeg"
+        )
+    sample_leaves = os.path.join(
+        os.getcwd(), 
+        "static/ghapp/images/sample_leaves_1.jpeg"
+        )
+    def tester():
+        print ("No red dot:")
+        print (detect_properties(sample_grass))
+        print ("With red dot:")
+        print (detect_properties(sample_grass_with_red_dot))
+        print ("With red dots:")
+        print (detect_properties(sample_grass_with_red_dots))
+    
+    def tester2():
+        print ("Leaves")
+        print (detect_properties(sample_leaves))
+        print ("With a few weeds: ")
+        print (detect_properties(sample_weeds_6))
+        print ("With a more weeds: ")
+        print (detect_properties(sample_weeds_5))
+
+    tester2()
 
 if __name__ == "__main__":
     main()
