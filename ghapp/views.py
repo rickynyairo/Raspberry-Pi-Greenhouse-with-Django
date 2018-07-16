@@ -73,7 +73,7 @@ def commands(request):
 		greenhouse.switch_lights("on")
 		response = JsonResponse({"lights":"on"}, status=201)
 	elif command_id == 200:
-		greenhouse.move_vent(90)
+		greenhouse.move_vent(80)
 		response = JsonResponse({"vent":"open"}, status=201)
 	elif command_id == 201:
 		greenhouse.move_vent(170)
