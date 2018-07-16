@@ -20,9 +20,10 @@ def detect_properties(image_path):
         print('\tr: {}'.format(color.color.red))
         print('\tg: {}'.format(color.color.green))
         print('\tb: {}'.format(color.color.blue))'''
+        testval = color.color.red * color.color.green * color.color.blue
         if color.color.red > max_red:
             max_red = color.color.red
-        if color.color.red >= 110:  
+        if testval >= 1100000:  
             fraction = fraction + color.pixel_fraction
     return max_red, fraction
 
