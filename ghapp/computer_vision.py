@@ -18,7 +18,7 @@ def detect_properties(image_path):
     for color in properties.dominant_colors.colors:
         if color.color.red > max_red:
             max_red = color.color.red
-        if color.color.red >= 200:  
+        if color.color.red >= 185:  
             fraction = fraction + color.pixel_fraction
     return max_red, fraction
 
@@ -91,8 +91,8 @@ def main():
         print ("With more weeds 2: ")
         print (detect_properties(lots_of_weeds_2))
 
-    tester()
-    tester2()
+    #tester()
+    #tester2()
     actual()
 
 if __name__ == "__main__":
