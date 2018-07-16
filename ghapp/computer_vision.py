@@ -14,10 +14,12 @@ def detect_properties(image_path):
     properties = client.image_properties(image=image).image_properties_annotation
     
     max_red = properties.dominant_colors.colors[0].color.red
-    fraction = properties.dominant_colors.colors[0].pixel_fraction
+    fraction = 0#properties.dominant_colors.colors[0].pixel_fraction
     for color in properties.dominant_colors.colors:
         if color.color.red > max_red:
-            max_red, fraction = color.color.red, color.pixel_fraction
+            max_red = color.color.red
+        if color.color.red >= 200:  
+            fraction = fraction + color.pixel_fraction
     return max_red, fraction
 
 def main():
@@ -88,7 +90,7 @@ def main():
         print (detect_properties(lots_of_weeds))
         print ("With more weeds 2: ")
         print (detect_properties(lots_of_weeds_2))
-        
+
     tester()
     tester2()
     actual()
