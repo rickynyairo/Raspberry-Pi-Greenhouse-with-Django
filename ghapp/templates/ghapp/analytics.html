@@ -1,8 +1,9 @@
 {% extends "ghapp/master.html" %}
 
+{% load static %}
+
 {% block title %}Green House System{% endblock %}
 
-{% load static %}
 {% block content %}
 <fieldset class="preview-border col-md-8">
     <legend>Graph:</legend>
@@ -60,7 +61,7 @@
             borderWidth: 1
         };
 
-        var series = [
+        let series = [
             {
                 name: 'Temperature',
                 data: temperature
@@ -70,7 +71,7 @@
                 data: humidity
             }
         ];  
-        var json = {};
+        let json = {};
         json.title = title;
         json.subtitle = subtitle;
         json.xAxis = xAxis;

@@ -8,7 +8,6 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.utils import timezone
-from django.contrib.auth.models import User
 
 #relative imports
 from .serializers import SensorDataSerializer, ActivityMetaSerializer
@@ -64,7 +63,6 @@ def analytics(request):
 @csrf_exempt
 def commands(request):
 	command_id = int(request.POST['command'])
-	#User.objects.get(username=request.user.username) act = ActivityMeta("lights_off", user) act = ""
 	greenhouse = GreenHouse()
 	if command_id == 100:
 		greenhouse.switch_lights("off")
@@ -101,15 +99,3 @@ def save_data(request):
 		return JsonResponse(serializer.data, status=201)
 	else:
 		return JsonResponse(serializer.errors, status=400)
-"""
-@csrf_exempt
-def save_activity(request):
-	data = json.loads(request.body.decode("utf-8"))
-	serializer = ActivityMetaSerializer(data=data)
-	#fields = ('activity','user', 'date_recorded')
-	if serializer.is_valid():
-		serializer.save()
-		return JsonResponse(serializer.data, status=201)
-	else:
-		return JsonResponse(serializer.errors, status=400)
-"""

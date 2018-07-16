@@ -15,10 +15,10 @@ def main():
 	#corrective actions such as watering or airing based on conditions in the greenhouse
 	if argv[1] == "sm":
 		if temperature > 26 or humidity > 68:
-			gh.move_vent(90)
+			gh.move_vent(80)
 			gh.switch_fan("on")
 		elif temperature <= 23 or humidity <= 60:
-			gh.move_vent(20)
+			gh.move_vent(170)
 			gh.switch_fan("off")
 		elif soil_moisture_state == "dry":
 			gh.switch_pump(3)

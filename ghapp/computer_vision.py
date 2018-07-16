@@ -43,7 +43,7 @@ def main():
         "static/ghapp/images/few_weeds.jpeg"
         )
 
-    def actual():
+    def weed_detection():
         print ("No weeds")
         print (detect_properties(no_weeds))
         print ("With a few weeds: ")
@@ -53,7 +53,7 @@ def main():
         print ("With more weeds 2: ")
         print (detect_properties(lots_of_weeds_2))
 
-    actual()
+    weed_detection()
 
 if __name__ == "__main__":
     main()
