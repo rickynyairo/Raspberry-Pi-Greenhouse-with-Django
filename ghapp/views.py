@@ -101,7 +101,7 @@ def save_data(request):
 		return JsonResponse(serializer.data, status=201)
 	else:
 		return JsonResponse(serializer.errors, status=400)
-
+"""
 @csrf_exempt
 def save_activity(request):
 	data = json.loads(request.body.decode("utf-8"))
@@ -112,3 +112,4 @@ def save_activity(request):
 		return JsonResponse(serializer.data, status=201)
 	else:
 		return JsonResponse(serializer.errors, status=400)
+"""

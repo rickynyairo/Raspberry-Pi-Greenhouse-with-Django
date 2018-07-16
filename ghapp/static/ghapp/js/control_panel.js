@@ -44,7 +44,7 @@ $(function(){
 	});
 	$("#pump_button").click(function(){
 		console.log("turning pump on");
-		$("#pump_response_label").text(" ")
+		$("#pump_response_label").text(" ");
 	    $.post(url,{"command":300},function(data, status){
 			console.log(JSON.stringify(data));
 			$("#pump_response_label").text(JSON.stringify(data));
