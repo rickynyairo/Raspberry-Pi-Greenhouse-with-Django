@@ -4,7 +4,21 @@
 
 
 {% block content %}
-<div class = "container" id = "graph-div" style = "width: 550px; height: 400px; margin: 0 auto"></div>
+<fieldset class="preview-border col-md-6">
+    <legend>Graph:</legend>
+	<div class = "container" id = "graph-div" style = "width: 550px; height: 400px; margin: 0 auto"></div>
+</fieldset>
+<fieldset class="preview-border col-md-6">
+	<legend>Weed Detection System:</legend>
+	<img src="{% static 'ghapp/images/no_weeds.jpeg' %}" alt="">
+	<label class="label label-info">Weed spread: 0%</label>
+	<hr/>
+	<img src="{% static 'ghapp/images/few_weeds.jpeg' %}" alt="">
+	<label class="label label-info">Weed spread: 3.2%</label>
+    <hr/>
+    <img src="{% static 'ghapp/images/a_lot_of_weeds_2.jpeg' %}" alt="">
+	<label class="label label-info">Weed spread: 22.8%</label>
+</fieldset>
 <script>
     $(document).ready(function(){
         let temperatureStr = "{{ temperature | safe}}";
@@ -13,7 +27,7 @@
         let humidity = JSON.parse(humidityStr);
 
         let title = {
-            text:'Greenhouse Conditions'
+            text:'Greenhouse System'
         };
         let subtitle = {
             text:'Atmospheric conditions'
