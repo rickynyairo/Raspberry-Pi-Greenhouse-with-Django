@@ -16,10 +16,10 @@ def detect_properties(image_path):
     max_red = properties.dominant_colors.colors[0].color.red
     fraction = 0#properties.dominant_colors.colors[0].pixel_fraction
     for color in properties.dominant_colors.colors:
-        '''print('fraction: {}'.format(color.pixel_fraction))
+        print('fraction: {}'.format(color.pixel_fraction))
         print('\tr: {}'.format(color.color.red))
         print('\tg: {}'.format(color.color.green))
-        print('\tb: {}'.format(color.color.blue))'''
+        print('\tb: {}'.format(color.color.blue))
         if color.color.red > max_red:
             max_red = color.color.red
         if color.color.red >= 150:  
