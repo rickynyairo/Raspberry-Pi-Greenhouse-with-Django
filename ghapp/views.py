@@ -115,7 +115,7 @@ def get_data(request):
 		'temperature':str(temperature),
 		'humidity':str(humidity),
 		'soil_moisture':soil_moisture,
-		'lighting':stlighting
+		'lighting':lighting
 	}
 
 	return JsonResponse(resp, status = 201)
