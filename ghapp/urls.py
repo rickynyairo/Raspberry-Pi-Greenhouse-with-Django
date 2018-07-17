@@ -12,6 +12,7 @@ urlpatterns = [
 	path('control_panel/', views.control_panel, name='control_panel'),
 	path('analytics/', views.analytics, name='analytics'),
 	path('save_data/', views.save_data, name='save_data'),
+	path('get_data/', views.get_data, name='get_data'),
 	path('system_preview/', views.system_preview, name='system_preview'),
 	path('logout/', auth_views.logout, {'template_name':'ghapp/index.html'},name="logout"),
 	path('login/', auth_views.login,{'template_name':'ghapp/login.html'}, name="login"),

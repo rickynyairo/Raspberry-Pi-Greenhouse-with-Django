@@ -7,16 +7,20 @@
 <fieldset class="preview-border col-md-6">
 	<legend>Atmospheric Conditions:</legend>
 	<label class="label label-info">Temperature: </label>
-	<label class="label label-info">{{ temperature }}</label>
+	<label class="label label-info" id = "temp_label">{{ temperature }}</label>
 	<hr/>
 	<label class="label label-info">Humidity: </label>
-	<label class="label label-info">{{ humidity }}</label>
+	<label class="label label-info" id = "humidity_label">{{ humidity }}</label>
+	<hr/>
+	<label class="label label-info">Lighting: </label>
+	<label class="label label-info" id = "light_label" style="text-transform:uppercase">{{ lighting }}</label>
 </fieldset>
 <fieldset class="preview-border col-md-6">
 	<legend>Soil Conditions:</legend>
 	<label class="label label-info">Moisture Content: </label>
-	<label class="label label-info" id="moistureLabel" style="text-transform:uppercase">{{ soil_moisture }}</label>
+	<label class="label label-info" id="moisture_label" style="text-transform:uppercase">{{ soil_moisture }}</label>
 </fieldset>
+<button class="btn btn-info" id="refresh_button">Refresh</button>
 <fieldset class="preview-border col-md-8">
 	<legend>Recent Activity:</legend>
 	<font size = "1.6" weight="0.2" >
@@ -37,6 +41,19 @@
 	</font>
 </fieldset>
 
+<script>
+	let ref_url = "/ghapp/get_data/";
+	$("#refresh_button").click(function(){
+		console.log("refresh clicked");
+		$.post(ref_url, function(data, status){
+			console.log(JSON.stringify(data));
+			$("temp_label").text(data.temperature);
+			$("light_label").text(data.lighting);
+			$("humidity_label").text(data.humidity);
+			$("moisture_label").text(data.soil_moisture);
+		});
+	});
+</script>
 
 {% endblock %}
 

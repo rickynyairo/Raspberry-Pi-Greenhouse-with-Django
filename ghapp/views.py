@@ -33,7 +33,8 @@ def system_preview(request):
 		context = {
 			'temperature':str(greenhouse.get_temperature()),
 			'humidity':str(greenhouse.get_humidity()),
-			'soil_moisture':str(greenhouse.get_soil_moisture()),
+			'soil_moisture':greenhouse.get_soil_moisture(),
+			'lighting':light_intensity
 			'activities':activities_qs
 		}
 		rendered = render(request, 'ghapp/system_preview.html', context=context)
@@ -103,3 +104,18 @@ def save_data(request):
 		return JsonResponse(serializer.data, status=201)
 	else:
 		return JsonResponse(serializer.errors, status=400)
+
+@csrf_exempt
+def get_data(request):
+	gh = GreenHouse()
+	temperature, humidity = gh.get_temperature(), gh.get_humidity()
+	lighting, soil_moisture = gh.ldr_reading(), gh.get_soil_moisture()
+
+	resp = {
+		'temperature':str(temperature),
+		'humidity':str(humidity),
+		'soil_moisture':soil_moisture,
+		'lighting':stlighting
+	}
+
+	return JsonResponse(resp, status = 201)

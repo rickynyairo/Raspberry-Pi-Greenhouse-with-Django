@@ -81,8 +81,16 @@ class GreenhouseSystem(object):
 
 		while(GPIO.input(ldr)==GPIO.LOW):
 			count += 1
-
-		return count
+		lighting = ""
+		if count <= 10:
+			lighting = "bright"
+		elif count <= 70:
+			lighting = "lit"
+		elif count <= 200:
+			lighting = "dim"
+		else:
+			lighting = "dark"
+		return lighting
 
 	def move_vent(self, angle = vent_angle):
 		#setup pwm on servo pin
