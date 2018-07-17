@@ -47,10 +47,10 @@
 		console.log("refresh clicked");
 		$.post(ref_url, function(data, status){
 			console.log(JSON.stringify(data));
-			$("temp_label").text(data.temperature);
-			$("light_label").text(data.lighting);
-			$("humidity_label").text(data.humidity);
-			$("moisture_label").text(data.soil_moisture);
+			$("#temp_label").text(data.temperature);
+			$("#light_label").text(data.lighting);
+			$("#humidity_label").text(data.humidity);
+			$("#moisture_label").text(data.soil_moisture);
 		});
 	});
 </script>
