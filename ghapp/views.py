@@ -28,6 +28,7 @@ def control_panel(request):
 def system_preview(request):
 	if request.user.is_authenticated:
 		greenhouse = GreenHouse()
+		light_intensity = greenhouse.ldr_reading()
 		activities_qs = list(ActivityMeta.objects.all())[:4]
 		context = {
 			'temperature':str(greenhouse.get_temperature()),
@@ -77,8 +78,11 @@ def commands(request):
 		greenhouse.move_vent(170)
 		response = JsonResponse({"vent":"closed"}, status=201)
 	elif command_id == 300:
-		greenhouse.switch_pump(3)
-		response = JsonResponse({"water pump":"done"}, status=201)
+		if greenhouse.get_soil_moisture() == "wet":
+			response = JsonResponse({"water pump":"the soil is wet"}, status=201)
+		else:
+			greenhouse.switch_pump(3)
+			response = JsonResponse({"water pump":"done"}, status=201)
 	elif command_id == 400:
 		greenhouse.switch_fan("off")
 		response = JsonResponse({"fan":"off"}, status=201)
