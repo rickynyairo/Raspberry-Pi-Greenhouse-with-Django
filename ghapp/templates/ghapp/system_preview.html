@@ -4,6 +4,7 @@
 {% block title %}Green House System{% endblock %}
 
 {% block content %}
+
 <fieldset class="preview-border col-md-6">
 	<legend>Atmospheric Conditions:</legend>
 	<label class="label label-info">Temperature: </label>
@@ -15,12 +16,15 @@
 	<label class="label label-info">Lighting: </label>
 	<label class="label label-info" id = "light_label" style="text-transform:uppercase">{{ lighting }}</label>
 </fieldset>
+
 <fieldset class="preview-border col-md-6">
 	<legend>Soil Conditions:</legend>
 	<label class="label label-info">Moisture Content: </label>
 	<label class="label label-info" id="moisture_label" style="text-transform:uppercase">{{ soil_moisture }}</label>
 </fieldset>
+
 <button class="btn btn-info" id="refresh_button">Refresh</button>
+
 <fieldset class="preview-border col-md-8">
 	<legend>Recent Activity:</legend>
 	<font size = "1.6" weight="0.2" >
@@ -56,8 +60,6 @@
 </script>
 
 {% endblock %}
-
-
 
 
 {% block footer %}
