@@ -34,7 +34,7 @@ def system_preview(request):
 			'temperature':str(greenhouse.get_temperature()),
 			'humidity':str(greenhouse.get_humidity()),
 			'soil_moisture':greenhouse.get_soil_moisture(),
-			'lighting':light_intensity
+			'lighting':light_intensity,
 			'activities':activities_qs
 		}
 		rendered = render(request, 'ghapp/system_preview.html', context=context)
